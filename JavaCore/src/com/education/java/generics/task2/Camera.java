@@ -1,6 +1,6 @@
 package com.education.java.generics.task2;
 
-public class Camera {
+public class Camera extends Product<Camera> {
 	
 	private double pixel;
 
@@ -10,5 +10,10 @@ public class Camera {
 
 	public void setPixel(double pixel) {
 		this.pixel = pixel;
+	}
+
+	@Override
+	protected int deepCompare(Camera c) {
+		return 0;
 	}
 }

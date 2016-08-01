@@ -1,6 +1,6 @@
 package com.education.java.generics.task2;
 
-public class Product {
+public abstract class Product<T extends Product<T>> implements Comparable<T> {
 	
 	private String name;
 	
@@ -20,5 +20,12 @@ public class Product {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	protected abstract int deepCompare(T p);
+
+	@Override
+	public int compareTo(T o) {		
+		return deepCompare(o);
 	}
 }
