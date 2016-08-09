@@ -17,6 +17,7 @@ public class StreamReduceRunner {
 
 		System.out.println("\nFirst reduce: " + reduceSimple(myList));
 		System.out.println("Second reduce (identityVal): " + reduceIdentityVal(myList));
+		System.out.println("Even values are multiplied: " + multiplyEvenValues(myList));
 	}
 
 	private static void initializeList(List<Integer> list) {
@@ -24,6 +25,8 @@ public class StreamReduceRunner {
 		list.add(3);
 		list.add(5);
 		list.add(1);
+		list.add(2);
+		list.add(4);
 	}
 
 	private static int reduceSimple(List<Integer> list) {
@@ -40,5 +43,15 @@ public class StreamReduceRunner {
 	private static int reduceIdentityVal(List<Integer> list) {
 
 		return list.stream().reduce(1, (x, y) -> x * y);
+	}
+
+	private static int multiplyEvenValues(List<Integer> list) {
+
+		return list.stream().reduce(1, (x, y) -> {
+			if (y % 2 == 0) {
+				return x * y;
+			}
+			return x;
+		});
 	}
 }
