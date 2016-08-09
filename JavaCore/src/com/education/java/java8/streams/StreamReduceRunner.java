@@ -18,6 +18,11 @@ public class StreamReduceRunner {
 		System.out.println("\nFirst reduce: " + reduceSimple(myList));
 		System.out.println("Second reduce (identityVal): " + reduceIdentityVal(myList));
 		System.out.println("Even values are multiplied: " + multiplyEvenValues(myList));
+
+		List<Double> myListDouble = new ArrayList<>();
+		initializeDoubleList(myListDouble);
+
+		System.out.println("Parallel Square Root Calculation: " + parellelSquareRootCalc(myListDouble));
 	}
 
 	private static void initializeList(List<Integer> list) {
@@ -53,5 +58,17 @@ public class StreamReduceRunner {
 			}
 			return x;
 		});
+	}
+
+	private static double parellelSquareRootCalc(List<Double> list) {
+
+		return list.parallelStream().reduce(1.0D, (x, y) -> x * Math.sqrt(y), (x, y) -> x * y);
+	}
+
+	private static void initializeDoubleList(List<Double> list) {
+
+		list.add(1.0);
+		list.add(4.0);
+		list.add(9.0);
 	}
 }
