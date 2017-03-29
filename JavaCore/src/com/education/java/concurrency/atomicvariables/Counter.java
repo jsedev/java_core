@@ -2,14 +2,13 @@ package com.education.java.concurrency.atomicvariables;
 
 public class Counter {
 
-	private int count;
+    private int count;
 
-	public void increment() {
+    public void increment() {
+        count++;
+    }
 
-		count++;
-	}
-
-	public int getCount() {
-		return count;
-	}
+    public int getCount() {
+        return count;
+    }
 }
