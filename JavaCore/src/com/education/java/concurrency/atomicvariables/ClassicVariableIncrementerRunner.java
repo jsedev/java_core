@@ -1,6 +1,6 @@
 package com.education.java.concurrency.atomicvariables;
 
-public class AtomicVariablesRunner {
+public class ClassicVariableIncrementerRunner {
 
     public static void main(String[] args) throws InterruptedException {
 
