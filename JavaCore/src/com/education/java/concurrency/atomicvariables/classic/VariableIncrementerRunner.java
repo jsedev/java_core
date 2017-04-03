@@ -1,10 +1,10 @@
-package com.education.java.concurrency.atomicvariables;
+package com.education.java.concurrency.atomicvariables.classic;
 
-public class ClassicVariableIncrementerRunner {
+public class VariableIncrementerRunner {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Counter counter = new Counter();
+        ClassicCounterImpl counter = new ClassicCounterImpl();
 
         IncrementerThread it1 = new IncrementerThread(counter);
         IncrementerThread it2 = new IncrementerThread(counter);
@@ -15,6 +15,6 @@ public class ClassicVariableIncrementerRunner {
         it1.join();
         it2.join();
 
-        System.out.println("Counter: " + counter.getCount());
+        System.out.println("Counter: " + counter.getValue());
     }
 }

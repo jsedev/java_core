@@ -1,6 +1,8 @@
-package com.education.java.concurrency.atomicvariables;
+package com.education.java.concurrency.atomicvariables.classic;
 
 import java.util.stream.IntStream;
+
+import com.education.java.concurrency.atomicvariables.Counter;
 
 public class IncrementerThread extends Thread {
 
