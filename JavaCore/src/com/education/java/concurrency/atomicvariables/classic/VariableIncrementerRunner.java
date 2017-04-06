@@ -1,5 +1,7 @@
 package com.education.java.concurrency.atomicvariables.classic;
 
+import com.education.java.concurrency.atomicvariables.IncrementerThread;
+
 public class VariableIncrementerRunner {
 
     public static void main(String[] args) throws InterruptedException {
