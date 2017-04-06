@@ -1,10 +1,5 @@
 package com.education.java.concurrency.locks.incorrect;
 
-import com.education.java.concurrency.locks.BankVault;
-import com.education.java.concurrency.locks.TotalMoneyCounterOperation;
-import com.education.java.concurrency.locks.TransferOperation;
-import com.education.java.concurrency.locks.User;
-
 public class IncorrectMoneyTransferRunner {
 
     public static void main(String[] args) throws InterruptedException {

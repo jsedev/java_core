@@ -1,4 +1,4 @@
-package com.education.java.concurrency.locks;
+package com.education.java.concurrency.locks.incorrect;
 
 public class User {
 
