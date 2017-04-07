@@ -19,41 +19,61 @@ public class Count {
 
     public int getTotalCharacterWealth() {
 
-        if (lock.tryLock()) {
+        while (true) {
+
+            boolean isLocked = false;
+
             try {
 
-                return userBackpackMoney + userBankVaultMoney;
+                isLocked = lock.tryLock();
+
+                if (isLocked) {
+                    return userBackpackMoney + userBankVaultMoney;
+                } else {
+                    System.out.println("Get total character wealth is locked...");
+                    // process other resources
+                }
 
             } finally {
-                lock.unlock();
+                if (isLocked) {
+                    lock.unlock();
+                }
             }
-        } else {
-            System.out.println("Locked...");
-            return -1;
         }
     }
 
     public void performGoldTransfer() {
 
-        if (lock.tryLock()) {
+        while (true) {
+
+            boolean isLocked = false;
 
             try {
 
-                int amountToTransfer = userBackpackMoney;
-                userBackpackMoney = 0;
+                isLocked = lock.tryLock();
 
-                Thread.sleep(2000);
+                if (isLocked) {
 
-                userBankVaultMoney += amountToTransfer;
+                    int amountToTransfer = userBackpackMoney;
+                    userBackpackMoney = 0;
+
+                    Thread.sleep(2000);
+
+                    userBankVaultMoney += amountToTransfer;
+                    break;
+
+                } else {
+                    System.out.println("Perform gold transfer is locked...");
+                    // process other resources
+                }
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-                lock.unlock();
+                if (isLocked) {
+                    lock.unlock();
+                }
             }
-        } else {
-            System.out.println("Locked...");
         }
-
     }
 }
