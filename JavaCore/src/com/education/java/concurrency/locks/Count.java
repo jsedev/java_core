@@ -19,34 +19,40 @@ public class Count {
 
     public int getTotalCharacterWealth() {
 
-        lock.lock();
+        if (lock.tryLock()) {
+            try {
 
-        try {
+                return userBackpackMoney + userBankVaultMoney;
 
-            return userBackpackMoney + userBankVaultMoney;
-
-        } finally {
-            lock.unlock();
+            } finally {
+                lock.unlock();
+            }
+        } else {
+            System.out.println("Locked...");
+            return -1;
         }
     }
 
     public void performGoldTransfer() {
 
-        lock.lock();
+        if (lock.tryLock()) {
 
-        try {
+            try {
 
-            int amountToTransfer = userBackpackMoney;
-            userBackpackMoney = 0;
+                int amountToTransfer = userBackpackMoney;
+                userBackpackMoney = 0;
 
-            Thread.sleep(20000);
+                Thread.sleep(2000);
 
-            userBankVaultMoney += amountToTransfer;
+                userBankVaultMoney += amountToTransfer;
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+        } else {
+            System.out.println("Locked...");
         }
 
     }
