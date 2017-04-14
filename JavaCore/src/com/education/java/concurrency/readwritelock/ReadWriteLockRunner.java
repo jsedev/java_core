@@ -18,6 +18,10 @@ public class ReadWriteLockRunner {
 
     private static final Thread collectionPopulatorThread2;
 
+    private static final CollectionReader collectionReader;
+
+    private static final Thread collectionReaderThread;
+
     static {
 
         collectionHolder = new NonThreadSafeCollectionHolder();
@@ -31,6 +35,9 @@ public class ReadWriteLockRunner {
         collectionPopulator = new CollectionPopulator(collectionHolder);
         collectionPopulatorThread1 = new Thread(collectionPopulator);
         collectionPopulatorThread2 = new Thread(collectionPopulator);
+
+        collectionReader = new CollectionReader(collectionHolder);
+        collectionReaderThread = new Thread(collectionReader);
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -40,5 +47,12 @@ public class ReadWriteLockRunner {
 
         collectionPopulatorThread1.start();
         collectionPopulatorThread2.start();
+
+        maxReaderThread.join();
+        minReaderThread.join();
+        collectionPopulatorThread1.join();
+        collectionPopulatorThread2.join();
+
+        collectionReaderThread.start();
     }
 }

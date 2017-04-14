@@ -2,6 +2,7 @@ package com.education.java.concurrency.readwritelock;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -21,7 +22,14 @@ public class NonThreadSafeCollectionHolder {
     }
 
     public void addValue(int value) {
-        numbers.add(value);
+
+        lock.writeLock().lock();
+
+        try {
+            numbers.add(value);
+        } finally {
+            lock.writeLock().unlock();
+        }
     }
 
     public int findMax() {
@@ -30,7 +38,7 @@ public class NonThreadSafeCollectionHolder {
 
         try {
 
-            return numbers.stream().mapToInt(Integer::intValue).max().orElse(-1);
+            return Collections.max(numbers);
 
         } finally {
             lock.readLock().unlock();
@@ -43,7 +51,7 @@ public class NonThreadSafeCollectionHolder {
 
         try {
 
-            return numbers.stream().mapToInt(Integer::intValue).min().orElse(-1);
+            return Collections.min(numbers);
 
         } finally {
             lock.readLock().unlock();
@@ -52,6 +60,12 @@ public class NonThreadSafeCollectionHolder {
 
     public void printCollection() {
 
-        System.out.println("Actual collection: " + numbers);
+        lock.readLock().lock();
+
+        try {
+            System.out.println("Actual collection: " + numbers);
+        } finally {
+            lock.readLock().unlock();
+        }
     }
 }

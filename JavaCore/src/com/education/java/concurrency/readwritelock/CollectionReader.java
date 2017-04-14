@@ -1,10 +1,10 @@
 package com.education.java.concurrency.readwritelock;
 
-public class PrintAllCollectionReader implements Runnable {
+public class CollectionReader implements Runnable {
 
     private NonThreadSafeCollectionHolder collectionHolder;
 
-    public PrintAllCollectionReader(NonThreadSafeCollectionHolder collectionHolder) {
+    public CollectionReader(NonThreadSafeCollectionHolder collectionHolder) {
         this.collectionHolder = collectionHolder;
     }
 
