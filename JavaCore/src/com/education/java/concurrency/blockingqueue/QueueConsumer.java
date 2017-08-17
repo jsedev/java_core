@@ -13,7 +13,14 @@ public class QueueConsumer implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-
+		
+		Integer element = blockingQueue.element();
+		System.out.println(element);
+		
+		element = blockingQueue.peek();
+		System.out.println(element);
+		
+		element = blockingQueue.poll();
+		System.out.println(element);
 	}
 }
