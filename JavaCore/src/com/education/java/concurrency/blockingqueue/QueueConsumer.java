@@ -22,5 +22,18 @@ public class QueueConsumer implements Runnable {
 		
 		element = blockingQueue.poll();
 		System.out.println(element);
+		
+		element = blockingQueue.remove();
+		System.out.println(element);
+		
+		element = blockingQueue.remove();
+		System.out.println(element);
+		
+		try {
+			element = blockingQueue.take();
+			System.out.println(element);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}			
 	}
 }

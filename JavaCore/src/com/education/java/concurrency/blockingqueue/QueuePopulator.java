@@ -16,7 +16,14 @@ public class QueuePopulator implements Runnable {
 		blockingQueue.add(1);
 		
 		try {
+			
 			blockingQueue.put(2);
+			
+			blockingQueue.transfer(3);
+			
+			boolean isConsumed = blockingQueue.tryTransfer(4);
+			System.out.println(isConsumed);
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}		
